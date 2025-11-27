@@ -28,6 +28,20 @@ This README provides a detailed overview, installation guide, usage instructions
 
 Vib Lang is optimized for Linux environments but can be adapted to other Unix-like systems. The installation process places the main CLI in `/usr/bin/` and supporting binaries/libraries in `/usr/lib/vib-lang/`.
 
+=== Fast Download
+==== For HackerOS
+[source,bash]
+----
+curl -sSL -o install.hacker https://raw.githubusercontent.com/michal92299/vib-lang/main/install.hacker
+hackerc run install.hacker
+----
+==== For every linux distro
+[source,bash]
+----
+curl -sSL -o install.hacker https://raw.githubusercontent.com/michal92299/vib-lang/main/install.sh
+./install.sh
+----
+
 === Prerequisites
 
 - **Rust** (version 1.80+): For the compiler and virtual machine.
