@@ -5,7 +5,7 @@ vib t {file} {to programing lang} - translate your code to selected lang
 vib t - you must in project
 vib vm build - build from your project .object
 vib vm compile {file .object} - compile to .vib-vm
-vib vm run {your .vib-vm file}
+vib run {your .vib-vm file}
 vib install {install libs with bytes}
 vib remove {remove libs with bytes}
 vib build {build from your /build/build.hacker file}
