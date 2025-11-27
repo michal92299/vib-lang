@@ -1,14 +1,341 @@
-= Commands
-vib c - compile your project (you must in project with /cmd and bytes.yaml)
-vib c {file}
-vib t {file} {to programing lang} - translate your code to selected lang
-vib t - you must in project
-vib vm build - build from your project .object
-vib vm compile {file .object} - compile to .vib-vm
-vib run {your .vib-vm file}
-vib install {install libs with bytes}
-vib remove {remove libs with bytes}
-vib build {build from your /build/build.hacker file}
+= Vib Lang: A Modern, Versatile Programming Language
+
+:author: xAI Assistant
+:date: November 27, 2025
+:revnumber: 0.1.0
+:toc: left
+:sectnums:
+:icons: font
+
+== Introduction
+
+Vib Lang is a fictional, innovative programming language designed primarily for hackers and Linux enthusiasts, but accessible to developers of all levels. It draws inspiration from Python, Ruby, and JavaScript, offering a clean, expressive syntax with powerful features like manual or automatic memory management, easy library imports, and embedded code blocks for seamless integration with other languages.
+
+Vib Lang aims to be efficient, expandable, and fun to use. It supports compilation to native binaries, translation to other languages (Rust, C, Java), and execution via a custom virtual machine (VM) that's inspired by JVM but simpler and more performant.
+
+Key features:
+- **Syntax Simplicity**: Bracket-based blocks (`[]` instead of indentation or curly braces).
+- **Memory Flexibility**: Choose between manual memory management for performance-critical code or automatic for ease.
+- **Interoperability**: Embed code from other languages directly.
+- **Toolchain**: A comprehensive CLI (`vib`) for compilation, translation, running, and more.
+- **Package Management**: Integrated with `bytes` for dependencies.
+
+This README provides an overview, installation instructions, usage guide, syntax examples, and more.
+
+== Installation
+
+Vib Lang is designed for Linux systems. Installation places binaries in `/usr/bin/` and libraries in `/usr/lib/vib-lang/`.
+
+=== Prerequisites
+- Rust (for compiler and VM)
+- Crystal (for translator and main CLI)
+- Zig (for parser)
+- LLVM (for compilation)
+
+=== Building from Source
+1. Clone the repository:
++
+[source,bash]
+----
+git clone https://github.com/xai/vib-lang.git
+cd vib-lang
+----
+
+2. Build each component:
++
+- Virtual Machine (Rust):
++
+[source,bash]
+----
+cd virtual-machine
+cargo build --release
+----
+
+- Compiler (Rust):
++
+[source,bash]
+----
+cd ../compiler
+cargo build --release
+----
+
+- Translator (Crystal):
++
+[source,bash]
+----
+cd ../translator
+crystal build src/translator.cr -o translator
+----
+
+- Parser (Zig):
++
+[source,bash]
+----
+cd ../parser
+zig build-exe parser.zig
+----
+
+- Vib CLI (Crystal):
++
+[source,bash]
+----
+cd ../vib
+crystal build src/vib.cr -o vib
+----
+
+3. Install binaries and libs:
++
+[source,bash]
+----
+sudo mkdir -p /usr/lib/vib-lang/bin /usr/lib/vib-lang/libs
+sudo cp virtual-machine/target/release/virtual-machine /usr/lib/vib-lang/bin/
+sudo cp compiler/target/release/compiler /usr/lib/vib-lang/bin/
+sudo cp translator /usr/lib/vib-lang/bin/
+sudo cp parser /usr/lib/vib-lang/bin/
+sudo cp vib /usr/bin/
+# Copy libs if any to /usr/lib/vib-lang/libs/
+----
+
+=== Package Manager (bytes)
+Vib uses `bytes` for dependency management. Install it separately if needed.
+
+== Project Structure
+
+A typical Vib project looks like this:
+
+----
+my-project/
+├── bytes.yaml  # Dependency manifest (like Cargo.toml)
+├── cmd/
+│   └── main.vib  # Main source file
+└── build/  # Generated during build
+    ├── build.hacker  # Configuration for translation/build
+    └── release/  # Binaries or .object files
+----
+
+`bytes.yaml` example:
+[source,yaml]
+----
+name: my-project
+version: 0.1.0
+dependencies:
+  - stdlib: ^1.0
+----
+
+== Usage
+
+The `vib` CLI is the central tool for working with Vib Lang. All sub-binaries are invoked internally by `vib`; users should not call them directly.
+
+=== Commands
+
+- *vib c*: Compile the current project to a native binary. Requires `/cmd/main.vib` and `bytes.yaml`. Output in `/build/release/`.
++
+Example:
+[source,bash]
+----
+cd my-project
+vib c
+----
+
+- *vib c <file.vib>*: Compile a single `.vib` file to a native binary.
++
+Example:
+[source,bash]
+----
+vib c hello.vib
+----
+
+- *vib t <file.vib> <lang>*: Translate a `.vib` file to another programming language (rust, c, java). Outputs a file like `hello.rs`. Then, a TUI prompts to compile to binary or VM.
++
+Example:
+[source,bash]
+----
+vib t main.vib rust
+----
+
+- *vib t*: Translate the current project and generate `/build/build.hacker` configuration file.
++
+Example:
+[source,bash]
+----
+vib t
+----
+
+- *vib vm build*: Build the current project to VM bytecode (`.object` files) in `/build/release/`.
++
+Example:
+[source,bash]
+----
+vib vm build
+----
+
+- *vib vm compile <file.object>*: Compile a `.object` file to a runnable `.vib-vm` (like .jar).
++
+Example:
+[source,bash]
+----
+vib vm compile main.object
+----
+
+- *vib run <file.vib-vm>*: Run a `.vib-vm` file using the custom VM.
++
+Example:
+[source,bash]
+----
+vib run app.vib-vm
+----
+
+- *vib install*: Install dependencies via `bytes install`.
++
+Example:
+[source,bash]
+----
+vib install
+----
+
+- *vib remove*: Remove dependencies via `bytes remove`.
++
+Example:
+[source,bash]
+----
+vib remove
+----
+
+- *vib build*: Build based on `/build/build.hacker` configuration (e.g., translate and compile).
++
+Example:
+[source,bash]
+----
+vib build
+----
+
+- *vib help*: Display help message.
++
+Example:
+[source,bash]
+----
 vib help
+----
+
+- *vib docs*: Show built-in documentation.
++
+Example:
+[source,bash]
+----
 vib docs
+----
+
+- *vib tutorials*: Display tutorials.
++
+Example:
+[source,bash]
+----
 vib tutorials
+----
+
+== Syntax Overview
+
+Vib Lang's syntax is concise and familiar.
+
+=== Imports
+Use `:biblioteka:` for imports (like Python's `import` or Ruby's `require`).
++
+Example:
+[source,vib]
+----
+:biblioteka: stdio
+----
+
+=== Memory Management
+Specify with `<zarzadznie pamiecia>`.
++
+- `manual`: For fine-grained control (alloc/free).
+- `automatic`: Reference counting or GC-like.
++
+Example:
+[source,vib]
+----
+<zarzadznie pamiecia> automatic
+----
+
+=== Output
+Use `write` instead of `print`.
++
+Example:
+[source,vib]
+----
+write "Hello, Vib!"
+----
+
+=== Blocks
+Use `[]` for blocks (instead of `{}` or indentation).
++
+Example:
+[source,vib]
+----
+if true [
+  write "True!"
+]
+----
+
+=== Embedded Code
+Embed other languages with `#=lang={ code }`.
++
+Supported: rust, c, java.
++
+Example:
+[source,vib]
+----
+#=rust={
+println!("Embedded Rust!");
+}
+----
+
+=== Full Example
+[source,vib]
+----
+:biblioteka: stdio
+
+<zarzadznie pamiecia> automatic
+
+main [
+  write "Hello from Vib!"
+
+  #=c={
+  printf("Embedded C!\n");
+  }
+]
+----
+
+== Examples
+
+=== Hello World
+Create `hello.vib`:
+[source,vib]
+----
+write "Hello, World!"
+----
+
+Compile and run:
+[source,bash]
+----
+vib c hello.vib
+./hello
+----
+
+=== Project Setup
+1. Create `bytes.yaml` and `cmd/main.vib`.
+2. Run `vib install` for deps.
+3. `vib c` to compile.
+4. `./build/release/main`
+
+== Contributing
+
+Contributions welcome! Fork the repo, make changes, and submit a PR.
+
+- Report issues on GitHub.
+- Follow code style: Use 2 spaces for indentation.
+
+== License
+
+MIT License. See LICENSE file for details.
