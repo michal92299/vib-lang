@@ -1,0 +1,12 @@
+// sudo
+// zig
+// crystal
+// shards
+// cargo
+// rustc
+// mv
+> cd parser && zig build && cd ..
+> cd compiler && cargo build --release && cd ..
+> cd vm && cargo build --release && cd ..
+> cd translator && crystal build main.cr --release && sudo mv main translator && cd ..
+> cd cli && crystal build main.cr --release && sudo mv main vib && cd ..
