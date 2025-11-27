@@ -1,14 +1,14 @@
-// cmd/main.vib
-// Przykład rozbudowanego programu w języku vib
-// Używa wszystkich aktualnych funkcji składni (2025+)
+-> cmd/main.vib
+-> Przykład rozbudowanego programu w języku vib
+-> Używa wszystkich aktualnych funkcji składni (2025+)
 
-// -> Ustawiamy automatyczne zarządzanie pamięcią (domyślne w większości projektów)
+-> Ustawiamy automatyczne zarządzanie pamięcią (domyślne w większości projektów)
 <automatic>
 
-// -> Importujemy standardową bibliotekę (zawiera write, read, itp.)
+-> Importujemy standardową bibliotekę (zawiera write, read, itp.)
 :std:
 
-// -> Definiujemy klasę Point
+-> Definiujemy klasę Point
 class Point
     fn new(x, y)
         self.x = x;
@@ -26,7 +26,7 @@ class Point
     end
 end
 
-// -> Definiujemy klasę Vector (dziedziczy po Point)
+-> Definiujemy klasę Vector (dziedziczy po Point)
 class Vector extends Point
     fn new(x, y, z)
         super.new(x, y);
@@ -38,23 +38,23 @@ class Vector extends Point
     end
 end
 
-// -> Funkcja główna
+-> Funkcja główna
 fn main()
-    // -> Zmienne
+    -> Zmienne
     let name = "Vib Lang";
     let version = 0.1;
     let points = [];
 
-    // -> Tworzymy kilka punktów
+    -> Tworzymy kilka punktów
     let p1 = Point.new(10, 20);
     let p2 = Point.new(30, 40);
     let v1 = Vector.new(1, 2, 3);
 
-    // -> Dodajemy do listy
+    -> Dodajemy do listy
     points.push(p1);
     points.push(p2);
 
-    // -> Pętla while
+    -> Pętla while
     let i = 0;
     while i < points.size
         let p = points[i];
@@ -62,36 +62,36 @@ fn main()
         i = i + 1;
     end
 
-    // -> Warunek if z else
+    -> Warunek if z else
     if p1.distance(p2) > 20
         write "Punkty są daleko od siebie!";
     else
         write "Punkty są blisko siebie.";
     end
 
-    // -> Obliczenia matematyczne
+    -> Obliczenia matematyczne
     let distance = p1.distance(p2);
     write "Odległość między p1 a p2: " + distance;
 
-    // -> Praca z wektorem 3D
+    -> Praca z wektorem 3D
     write "Długość wektora v1: " + v1.length();
 
-    // -> Embedded Rust – wstawiamy natywny kod (przykład)
+    -> Embedded Rust – wstawiamy natywny kod (przykład)
     #=rust={
         println!("To jest natywny kod Rust uruchomiony z vib!");
         let secret = 42;
         format!("Sekret z Rust: {}", secret)
     }=#
 
-    // -> Czytanie z konsoli
+    -> Czytanie z konsoli
     write "Podaj swoje imię: ";
     let user_name = read();
 
     write "Witaj, " + user_name + "! Witamy w " + name + " v" + version + "!";
 
-    // -> Zwracamy kod wyjścia
+    -> Zwracamy kod wyjścia
     return 0;
 end
 
-// -> Uruchamiamy funkcję główną
+-> Uruchamiamy funkcję główną
 main();
