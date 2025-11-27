@@ -1,1 +1,12 @@
+name: vib
+version: 0.1.0
 
+authors:
+  - Michal92299 <michalkaczmarzyk2009@gmail.com>
+
+description: |
+  Main CLI for Vib Lang
+
+crystal: ">= 1.0.0"
+
+license: GNU-3
