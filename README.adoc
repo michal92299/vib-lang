@@ -8,7 +8,7 @@ vib vm compile {file .object} - compile to .vib-vm
 vib vm run {your .vib-vm file}
 vib install {install libs with bytes}
 vib remove {remove libs with bytes}
-vib build {build from your bytes.yaml file}
+vib build {build from your /build/build.hacker file}
 vib help
 vib docs
 vib tutorials
