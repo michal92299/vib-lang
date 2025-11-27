@@ -1,14 +1,14 @@
-// hello.vib
-// Prosty program wypisujący "Hello Vib"
+-> hello.vib
+-> Prosty program wypisujący "Hello Vib"
 
 <automatic>          // -> automatyczne zarządzanie pamięcią (domyślnie)
 
 :std:                // -> importujemy bibliotekę standardową
 
-// -> Główny blok programu
+-> Główny blok programu
 [
     write "Hello Vib";
 ]
 
-// -> Alternatywnie można też tak (obie wersje działają identycznie):
-// write "Hello Vib";
+-> Alternatywnie można też tak (obie wersje działają identycznie):
+-> write "Hello Vib";
